@@ -53,13 +53,14 @@ Class Player
 	Field botRight:Vec2D = New Vec2D()
 	
 	
-	Field speed:Float = 6.0
+	Field speed:Float = 20
 	
 	Field leftKey:Int
 	Field rightKey:Int
 	Field upKey:Int
 	Field shiftKey:Int
 	Field currChar:Int
+	Field alreadyDoubleJump:bool
 	
 	Field jumps:Int
 	
@@ -74,6 +75,7 @@ Class Player
 		Self.shiftKey = shiftKey
 		Self.jumps = 2
 		Self.type = type
+		Self.alreadyDoubleJump = false
 		typeArray[0] = "Ninja"
 		typeArray[1] = "Knight"
 		typeArray[2] = "Wizard"
@@ -108,6 +110,12 @@ Class Player
 				velocity.y = -5.0
 				jumps -= 1
 			End
+			If type = "Ninja"
+				If jumps = 0
+					alreadyDoubleJump = True
+				End
+			End
+			
 		End
 		If KeyHit(shiftKey)
 			If currChar = 2
@@ -117,6 +125,27 @@ Class Player
 				currChar += 1
 			End
 		type = typeArray[currChar]
+		If type = "Ninja"
+			If alreadyDoubleJump = false
+				If jumps = 0
+					jumps = 1
+				End
+			End
+		End
+		
+		If type = "Kight"
+			
+			jumps = 0
+			
+		End
+		
+		If type = "Wizard"
+			
+			jumps = 0
+			
+		End
+	
+		
 		
 		End
 		
@@ -137,6 +166,21 @@ Class Player
 		
 		DrawRect(position.x-16, position.y-16, 32, 32)
 	End
+	
+	Method ResetJumps()
+	alreadyDoubleJump = false
+		If(type = "Ninja")
+			jumps = 2
+		End
+		If(type = "Knight")
+			jumps = 1
+		End
+		If(type = "Wizard")
+			jumps = 1
+		End
+	End
+		
+	 
 	
 	Method UpdateCornerPoints()
 		topLeft.Set(position.x - PLAYER_WIDTH/2, position.y - PLAYER_HEIGHT/2)
