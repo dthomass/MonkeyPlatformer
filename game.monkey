@@ -53,7 +53,7 @@ Class Player
 	Field botRight:Vec2D = New Vec2D()
 	
 	
-	Field speed:Float = 20
+	Field speed:Float = 6.0
 	
 	Field leftKey:Int
 	Field rightKey:Int

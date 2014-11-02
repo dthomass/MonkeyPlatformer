@@ -143,7 +143,9 @@ Class MainGame Extends App
 			If botLeftColl.x > botLeftColl.y
 				player.SetXPosition(mapOffset + botLeftTile.x * TILE_WIDTH + TILE_WIDTH + PLAYER_WIDTH /2)
 			Else
-				player.velocity.y = 0.0
+				If player.velocity.y > 0.0
+					player.velocity.y = 0.0
+				End
 				player.SetYPosition(botLeftTile.y * TILE_HEIGHT - PLAYER_HEIGHT / 2)
 				player.ResetJumps()
 			End
@@ -153,7 +155,9 @@ Class MainGame Extends App
 				player.SetXPosition(mapOffset + botRightTile.x * TILE_WIDTH  - PLAYER_WIDTH /2)
 				player.ResetJumps()
 			Else
-				player.velocity.y = 0.0
+				If player.velocity.y > 0.0
+					player.velocity.y = 0.0
+				End
 				player.SetYPosition(botRightTile.y * TILE_HEIGHT - PLAYER_HEIGHT / 2)
 			End
 		End
@@ -161,7 +165,9 @@ Class MainGame Extends App
 			If topLeftColl.x > topLeftColl.y
 				player.SetXPosition(mapOffset + topLeftTile.x * TILE_WIDTH + TILE_WIDTH + PLAYER_WIDTH /2)
 			Else
-				player.velocity.y = 0.0
+				If player.velocity.y < 0.0
+					player.velocity.y = 0.0
+				End
 				player.SetYPosition(botLeftTile.y * TILE_HEIGHT + PLAYER_HEIGHT / 2)
 				
 			End
@@ -170,7 +176,9 @@ Class MainGame Extends App
 			If topRightColl.x > topRightColl.y
 				player.SetXPosition(mapOffset + topRightTile.x * TILE_WIDTH - PLAYER_WIDTH /2)
 			Else
-				player.velocity.y = 0.0
+				If player.velocity.y < 0.0
+					player.velocity.y = 0.0
+				End
 				player.SetYPosition(botRightTile.y * TILE_HEIGHT + PLAYER_HEIGHT / 2)
 			End
 		End
