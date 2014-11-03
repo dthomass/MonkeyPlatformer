@@ -90,6 +90,7 @@ Class Player
 		velocity.Set(0,0)
 		currChar =0
 		type = typeArray[currChar]
+		ResetJumps()
 	End
 	
 	Method Update(gravity:Float)

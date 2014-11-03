@@ -10,7 +10,7 @@ Class MainGame Extends App
 	
 	Field gravity: Float= 0.2
 	
-	Field player:Player = New Player(KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_SHIFT, 10, -10000, "Ninja")
+	Field player:Player = New Player(KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_SHIFT, 10, 150, "Ninja")
 	
 	Field cam:Camera = New Camera()
 	
@@ -28,7 +28,6 @@ Class MainGame Extends App
 		mapOffset = (SCREEN_WIDTH Mod TILE_WIDTH)/2
 		
 		GenerateFloor(8)
-				GenerateFloor(7)
 		GenerateFloor(6)
 
 	End
