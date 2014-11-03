@@ -45,7 +45,7 @@ Class Player
 	Field position:Vec2D
 	Field velocity:Vec2D
 	Field type:String
-	Field typeArray:String[3]
+	Field typeArray:String[3] 'array of Player Characters
 	
 	Field topLeft:Vec2D = New Vec2D()
 	Field topRight:Vec2D = New Vec2D()
@@ -53,14 +53,14 @@ Class Player
 	Field botRight:Vec2D = New Vec2D()
 	
 	
-	Field speed:Float = 6.0
+	Field speed:Float = 6.0 'speed of player
 	
 	Field leftKey:Int
 	Field rightKey:Int
 	Field upKey:Int
 	Field shiftKey:Int
 	Field currChar:Int
-	Field alreadyDoubleJump:bool
+	Field alreadyDoubleJump:Bool
 	
 	Field jumps:Int
 	
@@ -75,17 +75,16 @@ Class Player
 		Self.shiftKey = shiftKey
 		Self.jumps = 2
 		Self.type = type
-		Self.alreadyDoubleJump = false
+		Self.alreadyDoubleJump = False
+		
 		typeArray[0] = "Ninja"
 		typeArray[1] = "Knight"
 		typeArray[2] = "Wizard"
-		currChar = 0
-		
-		
-		
+		currChar = 0 'Default characrer is Ninja
 		
 	End
 	
+	'Reset character position
 	Method Reset()
 		SetPosition(originalPos.x, originalPos.y)
 		velocity.Set(0,0)
@@ -126,14 +125,14 @@ Class Player
 			End
 		type = typeArray[currChar]
 		If type = "Ninja"
-			If alreadyDoubleJump = false
+			If alreadyDoubleJump = False
 				If jumps = 0
 					jumps = 1
 				End
 			End
 		End
 		
-		If type = "Kight"
+		If type = "Knight"
 			
 			jumps = 0
 			
@@ -145,16 +144,16 @@ Class Player
 			
 		End
 	
-		
-		
 		End
-		
-		
 		
 		SetPosition(position.x +velocity.x, position.y + velocity.y)
 		
 	End
 	
+	#rem
+	  Draw the characters
+	  Currently a rectangle.
+	#end
 	Method Draw()
 		If(type = "Ninja")
 			SetColor(0,255, 0)
@@ -167,8 +166,11 @@ Class Player
 		DrawRect(position.x-16, position.y-16, 32, 32)
 	End
 	
+	#rem
+	 Resets the jump to default number
+	#end
 	Method ResetJumps()
-	alreadyDoubleJump = false
+	alreadyDoubleJump = False
 		If(type = "Ninja")
 			jumps = 2
 		End
