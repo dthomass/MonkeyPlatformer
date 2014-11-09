@@ -234,9 +234,16 @@ End
 
 Class Block
 	Field position:Vec2D
-	
+	Field topRightCorner:Vec2D
+	Field topLeftCorner:Vec2D
+	Field botRightCorner:Vec2D
+	Field botLeftCorner:Vec2D
 	Method New(x:Float, y:Float)
 		position = New Vec2D(x, y)
+		topLeftCorner = New Vec2D(position.x - TILE_WIDTH/2, position.y - TILE_HEIGHT/2)
+		topRightCorner = New Vec2D(position.x + TILE_WIDTH/2, position.y - TILE_HEIGHT/2)
+		botLeftCorner = New Vec2D(position.x - TILE_WIDTH/2, position.y + TILE_HEIGHT/2)
+		botRightCorner = New Vec2D (position.x + TILE_WIDTH/2 , position.y + TILE_HEIGHT/2)	
 	End
 	
 	Method Draw()
@@ -246,5 +253,8 @@ Class Block
 		DrawRect(position.x-(TILE_WIDTH/2), position.y-(TILE_HEIGHT/2), TILE_WIDTH/2, TILE_HEIGHT/2)
 
 	End
+	
+	
+	
 End
 

@@ -27,8 +27,12 @@ Class MainGame Extends App
 		mapWidth = SCREEN_WIDTH / TILE_WIDTH
 		mapOffset = (SCREEN_WIDTH Mod TILE_WIDTH)/2
 		
-		GenerateFloor(8)
-		GenerateFloor(6)
+		'Make Blocks Here for Now'
+		blocks.AddLast(New Block(100,400))
+		blocks.AddLast(New Block(100+TILE_WIDTH,400))
+		blocks.AddLast(New Block(100+2*TILE_WIDTH,400))
+		blocks.AddLast(New Block(100+3*TILE_WIDTH,400))
+		blocks.AddLast(New Block(100+4*TILE_WIDTH,400))
 
 	End
 	
@@ -140,6 +144,54 @@ Class MainGame Extends App
 		Local topRightColl:Vec2D = GetTileCollision(player.position,topRightTile)
 		Local botLeftColl:Vec2D = GetTileCollision(player.position, botLeftTile)
 		Local botRightColl:Vec2D = GetTileCollision(player.position, botRightTile)
+		
+		For Local block:Block = Eachin blocks
+		
+			
+				
+			
+				'Note the + - 10 in checking Y position here is the "size" of the top and bot sides of a block. Can be changed as needed'
+				
+				'Note, Only have top and bot collision here, not side yet'
+				
+				'checks if players bot corners collide with block'
+				If (player.botLeft.y > block.topLeftCorner.y And player.botLeft.y < block.topLeftCorner.y +10) And player.botLeft.x < block.topRightCorner.x And player.botLeft.x > block.topLeftCorner.x
+					
+					player.SetYPosition(block.topLeftCorner.y  - PLAYER_HEIGHT / 2)
+					player.ResetJumps()
+					player.velocity.y = 0
+				
+				End
+				If  (player.botRight.y > block.topLeftCorner.y And player.botRight.y < block.topLeftCorner.y + 10) And player.botRight.x < block.topRightCorner.x And player.botRight.x > block.topLeftCorner.x
+					
+					player.SetYPosition(block.topLeftCorner.y  - PLAYER_HEIGHT / 2)
+					player.ResetJumps()
+					If player.velocity.y > 0
+						player.velocity.y = 0
+					End
+				
+				End
+				'checks if players top corners collide with block'
+					If (player.topLeft.y < block.botLeftCorner.y And player.botLeft.y - 10 > block.topLeftCorner.y) And player.topLeft.x < block.botRightCorner.x And player.topLeft.x > block.botLeftCorner.x
+					
+					player.SetYPosition(block.botLeftCorner.y  + PLAYER_HEIGHT / 2)
+					player.velocity.y = 0
+				
+				End
+				If  (player.topRight.y < block.botLeftCorner.y And player.botRight.y - 10> block.topLeftCorner.y) And player.botRight.x < block.topRightCorner.x And player.botRight.x > block.topLeftCorner.x
+					
+					player.SetYPosition(block.botLeftCorner.y  + PLAYER_HEIGHT / 2)
+					player.velocity.y = 0
+				
+				End
+			
+			
+		End
+		
+		
+		
+		
+		
 		
 		If botLeftColl <> Null
 			If botLeftColl.x > botLeftColl.y
